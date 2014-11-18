@@ -1,0 +1,4 @@
+hybrideditor
+============
+
+Pandoc + Ace + Markdown

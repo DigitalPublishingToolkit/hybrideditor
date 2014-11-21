@@ -117,8 +117,7 @@ div.header-center {
 }
 
 .label {
-    text-transform: uppercase;
-    font-size: 1.25em;
+    /*text-transform: uppercase;*/
 }
 
 #editortext {
@@ -139,9 +138,10 @@ div.header-center {
     padding: 10px;
     position: absolute;
     left: 0; top: 32px;
-    background: #EEE;
+    background: #FFF;
     width: 360px;
     display: none;
+    border: 2px solid #0F0;
 }
 
 #footer {
@@ -223,6 +223,11 @@ div.header-center {
 img.logo{
     position: fixed;
     width:80px;
-    right:5px;
+    right:15px;
     bottom:5px;
+}
+
+input, select, button{
+    background: #FFF;
+    border: 2px solid #0F0;
 }

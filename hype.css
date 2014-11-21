@@ -1,13 +1,84 @@
-body {}
+@font-face {
+    font-family: 'Ubuntu Mono Bold';
+    src: url('fonts/UbuntuMono-B.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Light.ttf');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-LightItalic.ttf');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Regular.ttf');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Italic.ttf');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Bold.ttf');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-BoldItalic.ttf');
+    font-weight: 600;
+    font-style: italic;
+}
+
+
+body {
+    font-family: Open Sans;
+    font-size: 12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu Mono Bold', monospace;
+}
 
 a {
-    text-decoration: none;
-    color: green;
+    color: #000;
+    text-decoration: underline;
 }
 
 a:hover {
+    color: #0F0;
     text-decoration: underline;
 }
+
+
+div.header, select, button, input {
+    font-family: 'Ubuntu Mono Bold', monospace;
+}
+
+
+div.header {
+    padding: 10px;
+    font-size:1em;
+    text-align:center;
+}
+
+div.header-center {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 #split {
     position: absolute;
@@ -16,7 +87,7 @@ a:hover {
 }
 
 #editor {
-    border-right: 2px dotted gray;
+    border-right: 2px dotted  #0F0;
 }
 
 #editor textarea {
@@ -47,7 +118,7 @@ a:hover {
 
 .label {
     text-transform: uppercase;
-    font-size: smaller;
+    font-size: 1.25em;
 }
 
 #editortext {
@@ -149,3 +220,9 @@ a:hover {
     cursor: move;
 }
 
+img.logo{
+    position: fixed;
+    width:80px;
+    right:5px;
+    bottom:5px;
+}

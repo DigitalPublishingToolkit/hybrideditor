@@ -1,55 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Hybrid Publishing Editor</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="lib/jquery-ui/jquery-ui.min.css"></script>
-    <link rel="stylesheet" type="text/css" href="hype.css">
+<link rel="stylesheet" type="text/css" href="hype.css">
 </head>
 <body>
-    <div id="split">
-        <div id="editor" class="left">
-            <div class="header">
-                <span class="label">markdown</span>
-                <div id="openmenucontext">
-                    <button id="openbutton">open...</button>
-                    <div id="openmenu">
-                        <form id="dropzone" action="/cgi-bin/pandoc.cgi" class="dropzone">
-                            <div class="fallback">
-                                <input name="file" type="file" />
-                            </div>
-                        </form>
-                        <!-- <form id="sideload" style="margin-top: 5px" action="/cgi-bin/pandoc.cgi">
-                            <label for="importurl">Upload from URL:</label><br />
-                            <input id="importurl" name="url" type="text" />
-                            <input type="submit" name="_submit" value="import" />
-                        </form> -->
-                    </div>
-                </div>
-            </div>
-            <div id="editortext"></div>
-        </div>
-        <div class="hdiv"></div>
-        <div id="preview" class="right">
-            <div class="header">
-                <form id="previewform" method="post" action="/cgi-bin/pandoc.cgi" target="previewiframe">
-                    <input type="hidden" name="text" id="previewformtext" />
-                    <input type="hidden" name="from" value="markdown" />
-                    <select id="formatselect" name="to">
-                        <option value="html">HTML</option>
-                        <option value="plain">Plain text</option>
-                        <option value="icml">ICML (InDesign)</option>
-                        <option value="markdown">Markdown</option>
-                    </select>
-                    <input type="submit" name="_submit" value="show"/>
-                    <input type="submit" name="_submit" value="download"/>
-                </form>
-            </div>
-            <div class="iframe"><iframe name="previewiframe"></iframe></div>
-        </div>
-    </div>
+  <div id="split">
+    <div id="editor" class="left">
+      <div class="header">
 
-    <div id="footer"><a href="https://github.com/DigitalPublishingToolkit">Hybrid Publishing Editor</a> is <a href="http://www.gnu.org/copyleft/gpl.html">free software</a> based on <a href="http://daringfireball.net/projects/markdown/">markdown</a>, <a href="http://johnmacfarlane.net/pandoc/">pandoc</a> &amp; <a href="http://ace.c9.io/">ace</a>.</div>
+        <div class="header-center">
+          <div id="openmenucontext">
+		  <span class="label">write markdown</span> / 		
+		  <button id="openbutton">import .docx</button>
+            <div id="openmenu">
+              <form id="dropzone" action="/cgi-bin/pandoc.cgi" class="dropzone">
+                <div class="fallback">
+                  <input name="file" type="file" />
+                </div>
+              </form>
+              <!-- <form id="sideload" style="margin-top: 5px" action="/cgi-bin/pandoc.cgi">
+                   <label for="importurl">Upload from URL:</label><br />
+                   <input id="importurl" name="url" type="text" />
+                   <input type="submit" name="_submit" value="import" />
+              </form> -->
+            </div>
+	  </div>
+        </div>
+      </div>
+      <div id="editortext">
+      </div>
+    </div>
+    <div class="hdiv"></div>
+    <div id="preview" class="right">
+      <div class="header">
+        <div class="header-center">
+          <form id="previewform" method="post" action="/cgi-bin/pandoc.cgi" target="previewiframe">
+            <input type="hidden" name="text" id="previewformtext" />
+            <input type="hidden" name="from" value="markdown" />
+            <select id="formatselect" name="to">
+              <option value="html">HTML</option>
+              <option value="plain">Plain text</option>
+              <option value="icml">ICML (InDesign)</option>
+              <option value="markdown">Markdown</option>
+            </select>
+            <input type="submit" name="_submit" value="show"/>
+            <input type="submit" name="_submit" value="download"/>
+          </form>
+	</div>
+      </div>
+      <div class="iframe"><iframe name="previewiframe"></iframe></div>
+    </div>
+  </div>
+
+  <div id="footer"><a href="https://github.com/DigitalPublishingToolkit">Hybrid Publishing Editor</a> is <a href="http://www.gnu.org/copyleft/gpl.html">free software</a> based on <a href="http://daringfireball.net/projects/markdown/">markdown</a>, <a href="http://johnmacfarlane.net/pandoc/">pandoc</a> &amp; <a href="http://ace.c9.io/">ace</a>.
+    <a href="http://networkcultures.org/digitalpublishing/"><img src="imgs/logo_horiz.jpg" class="logo" alt="" ></a>
+
+  </div>
 
 </body>
 

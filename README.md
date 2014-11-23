@@ -14,3 +14,7 @@ See a live demo at [http://pandoc.networkcultures.org](http://pandoc.networkcult
 To run:
 
     python serve.py
+
+## License
+
+This software is released under a [GPLv3 license](http://www.gnu.org/copyleft/gpl.html). See LICENSE.

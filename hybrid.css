@@ -231,3 +231,16 @@ input, select, button{
     background: #FFF;
     border: 2px solid #0F0;
 }
+
+div.dz-error-message span{
+    border-bottom: 2px dotted #0F0!important; 
+}
+
+div.dz-details{
+    font-size: 0.8em;
+    margin-top: 20px;
+}
+
+div.ace_print-margin{
+    visibility:hidden!important;
+}

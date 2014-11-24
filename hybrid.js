@@ -14,7 +14,7 @@ function get_editor_text () {
 }
 
 $("#previewform").on("submit", function () {
-  // console.log("preview form submit")
+  //console.log("preview form submit")
   $("#previewformtext").val(get_editor_text());
   return true;
 })
@@ -32,11 +32,13 @@ Dropzone.options.dropzone = {
     // console.log("success")
     $("#openmenu").hide();
     file.previewElement.classList.add("dz-success");
+      //    file.previewElement.classList.remove("dz-error-mark");
+
     set_editor(resp);
     var pf = $("#previewform");
     // console.log("about to submit", pf.get(0));
     pf.submit();
-  }
+  }   
 };
 
 $("#openbutton").click(function () {

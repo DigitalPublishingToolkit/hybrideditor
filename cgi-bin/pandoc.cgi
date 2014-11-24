@@ -42,7 +42,7 @@ if method == "POST":
     download = submit == "download"
     download_filename = None
     if download:
-        download_filename = "pandoc" + to_type['ext']
+        download_filename = "hype_conversion." + to_type['ext']
 
 
     try:
@@ -72,7 +72,7 @@ if method == "POST":
 
             print "Content-type: {0}".format(to_type['mime'])
             if download:
-                print "Content-Disposition: attachment;filename=\"pandoc.{0}\"".format(to_type['ext'])
+                print "Content-Disposition: attachment;filename=\"hype_conversion.{0}\"".format(to_type['ext'])
             print
             # p = subprocess.check_output('pandoc --from {0} --to {1} "{2}"'.format(ffrom, to, tmp.name), shell=True, stderr=subprocess.STDOUT)
             # print p
@@ -97,7 +97,7 @@ if method == "POST":
             try:
                 print "Content-type: {0}".format(to_type['mime'])
                 if download:
-                    print "Content-Disposition: attachment;filename=\"pandoc.{0}\"".format(to_type['ext'])
+                    print "Content-Disposition: attachment;filename=\"hype_conversion.{0}\"".format(to_type['ext'])
                 print
                 # p = subprocess.check_output('pandoc --from {0} --to {1} "{2}"'.format(ffrom, to, tmp.name), shell=True, stderr=subprocess.STDOUT)
                 # print p

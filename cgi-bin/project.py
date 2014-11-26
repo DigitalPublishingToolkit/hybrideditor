@@ -86,12 +86,15 @@ class Project (object):
         File `...' does not exist  ==> missing
         Must remake target `...'   ==> remake
         """
-        output = subprocess.check_output([MAKE, "-n", "--debug=v"], cwd=self.fullpath)
-        missingpat = re.compile(r"^\s*File\ \`(.+?)\'\ does\ not\ exist\.\s*$", re.M)
-        remakepat = re.compile(r"^\s*Must\ remake\ target\ \`(.+?)\'\.\s*$", re.M)
-        missing = [x for x in missingpat.findall(output) if is_filename(x)]
-        remake = [x for x in remakepat.findall(output) if is_filename(x)]
-        return remake, missing        
+        try:
+            output = subprocess.check_output([MAKE, "-n", "--debug=v"], cwd=self.fullpath)
+            missingpat = re.compile(r"^\s*File\ \`(.+?)\'\ does\ not\ exist\.\s*$", re.M)
+            remakepat = re.compile(r"^\s*Must\ remake\ target\ \`(.+?)\'\.\s*$", re.M)
+            missing = [x for x in missingpat.findall(output) if is_filename(x)]
+            remake = [x for x in remakepat.findall(output) if is_filename(x)]
+            return remake, missing        
+        except subprocess.CalledProcessError, e:
+            return [], []
 
     def _dict (self):
         ret = {}

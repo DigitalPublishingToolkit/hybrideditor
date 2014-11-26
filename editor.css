@@ -114,6 +114,10 @@ a:hover {
     color: gray;
 }
 
+#listing div.item a.rename {
+    display: none;
+}
+
 .itemcheckbox:checked + a {
   color: #0F0 !important;
 }
@@ -147,7 +151,7 @@ a:hover {
     left: 10px;
     bottom: 0px;
     right: 0;
-    height: 32px;
+    height: 26px;
 }
 
 .editorfoot label {
@@ -157,7 +161,7 @@ a:hover {
 #editor .preview {
     position: absolute;
     left: 0; right: 0;
-    top: 0; bottom: 0;
+    top: 0; bottom: 30px;
     z-index: 10;
     background: white;
     display: none;
@@ -173,40 +177,57 @@ a:hover {
 
 #editor .make {
     position: absolute;
-    left: 0; right: 0;
-    bottom: 0; top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 0;
     z-index: 10;
-    display: none;
+    background: #EEE;
 }
 
 #editor .make .body {
     position: absolute;
-    left: 0; top: 0;
+    left: 0; bottom: 0;
     width: 100%;
     height: 100%;
+    background: bray;
     overflow: auto;
 }
 
 #editor .make .body .stdout {
     color: black;
+    margin-top: 2em;
+    padding-left: 1em;
+    white-space: pre-wrap;
 }
 
 #editor .make .body .stderr {
     margin-top: 1em;
-    color: red;
+    color: #0F0;
+    margin-bottom: 5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    white-space: pre-wrap;
 }
 
-#editor .make .busy {
+#editor .make .icon  {
     position: absolute;
     left: 50%;
-    top: 50%;
-    display: none;
+    top: 0;
 }
 
-#editor .make .busy img {
+#editor .make .gear {
     position: relative;
-    left: -26px;
-    top: -26px;
+    left: -27px;
+    top: -27px;
+    cursor: pointer;
+    width: 54px;
+    height: 54px;
+    background-image: url("imgs/gear.png");
+}
+
+#editor .busy .gear {
+    background-image: url("imgs/gear.gif") !important;
 }
 
 /* ********************************* */
@@ -221,13 +242,13 @@ a:hover {
 
 .left {
     position: absolute;
-    left: 0; right: 50%;
+    left: 0; right: 70%;
     top: 0; bottom: 0;
 }
 
 .right {
     position: absolute;
-    left: 50%; right: 0;
+    left: 30%; right: 0;
     top: 0; bottom: 0;
 }
 
@@ -245,7 +266,7 @@ a:hover {
 
 .hdiv {
     position: absolute;
-    left: 50%;
+    left: 30%;
     top: 0; bottom: 0;
     z-index: 100;
 }
@@ -284,8 +305,9 @@ a:hover {
     right: 0;
     text-align: center;
     font-size: smaller;
-    padding-bottom: 10px;
-    z-index: 100;
+    height: 30px;
+    z-index: 1000;
+    background: white;
 }
 
 img.logo{
@@ -313,3 +335,30 @@ div.ace_print-margin{
     visibility:hidden!important;
 }
 
+/* http://filedropjs.org */
+/***
+  Styles below are only required if you're using <iframe> fallback in
+  addition to HTML5 drag & drop (only working in Firefox/Chrome).
+ ***/
+
+ /* Essential FileDrop zone element configuration: */
+.fd-zone {
+}
+
+/* Hides <input type="file"> while simulating "Browse" button: */
+.fd-file {
+  opacity: 0;
+  font-size: 118px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  font-family: sans-serif;
+}
+
+/* Provides visible feedback when use drags a file over the drop zone: */
+.fd-zone.over { border-color: maroon; background: #eee; }

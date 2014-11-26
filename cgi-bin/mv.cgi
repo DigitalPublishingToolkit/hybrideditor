@@ -9,23 +9,29 @@ from project import Project
 method = os.environ.get("REQUEST_METHOD", "")
 fs = cgi.FieldStorage()
 project = fs.getvalue("p", "")
-paths = fs.getlist("f[]")
+frompaths = fs.getlist("f[]")
+topaths = fs.getlist("t[]")
 
 ret = {}
 ret['returncode'] = -1
+
+print >> sys.stderr, "mv", frompaths, topaths
+
 passes = 0
 fails = 0
 
-if paths:
+if frompaths:
     proj = Project(project)
-    for p in paths:
-        fp = os.path.join(proj.fullpath, p)
-        # print >> sys.stderr, "*** rm", fp
+    for f, t in zip(frompaths, topaths):
+        frompath = os.path.join(proj.fullpath, f)
+        topath = os.path.join(proj.fullpath, t)
         try:
-            os.remove(fp)
+            os.rename(frompath, topath)
             passes += 1
-        except OSError, e:
+        except OSError:
             fails += 1
+            pass
+        # print >> sys.stderr, "***", frompath, topath
     ret['passes'] = passes
     ret['fails'] = fails
     ret['returncode'] = 0

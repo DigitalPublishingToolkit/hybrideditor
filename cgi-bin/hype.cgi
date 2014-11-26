@@ -17,10 +17,7 @@ project = fs.getvalue("p", "")
 proj = Project(project)
 varz = {}
 varz['project'] = proj.path
-varz['listing_url'] = "/cgi-bin/listing.cgi?"+urlencode({'p': proj.path})
-varz['make_url'] = "/cgi-bin/make.cgi?"+urlencode({'p': proj.path})
-varz['rm_url'] = "/cgi-bin/rm.cgi?"+urlencode({'p': proj.path})
-varz['save_url'] = "/cgi-bin/save.cgi?"+urlencode({'p': proj.path})
+varz['cgi_url'] = "/cgi-bin/"
 
 print """<!DOCTYPE html>
 <html>
@@ -28,10 +25,7 @@ print """<!DOCTYPE html>
 <title>hype : {0[project]}</title>
 <link rel="stylesheet" type="text/css" href="/lib/jquery-ui/jquery-ui.min.css"></script>
 <link rel="stylesheet" type="text/css" href="/editor.css">
-<link rel="listing-data-source" href="{0[listing_url]}">
-<link rel="make-url" href="{0[make_url]}">
-<link rel="rm-url" href="{0[rm_url]}">
-<link rel="save-url" href="{0[save_url]}">
+<link rel="cgi-url" href="{0[cgi_url]}">
 </head>
 <body>
 <div id="contents">
@@ -39,10 +33,15 @@ print """<!DOCTYPE html>
         <div id="listing" class="left">
             <div class="controls">
                 <span class="selection_functions">
-                    <button id="listing_delete_selection">delete selected</button>
+                    <button id="listing_rename">rename</button>
+                    <button id="listing_delete">delete</button>
+                    <button id="listing_cancel">cancel</button>
                 </span>
-                <button id="listing_select_all">select all</button>
-                <button id="listing_refresh_button" class="refresh">refresh</button>
+                <span class="regular_functions">
+                    <button id="listing_newfile">new file</button>
+                    <button id="listing_newfolder">new folder</button>
+                    <button id="listing_refresh" class="refresh">refresh</button>
+                </span>
             </div>
             <div class="body"></div>
         </div>
@@ -54,16 +53,21 @@ print """<!DOCTYPE html>
         <a href="http://networkcultures.org/digitalpublishing/"><img src="/imgs/logo_horiz.jpg" class="logo" alt="" ></a>
     </div>
 
+
 </div>
 </body>
 <script>
-aa = {{}};
+var aa = {{}};
+var project = "{0[project]}";
 </script>
 <script src="/lib/jquery.min.js"></script>
 <script src="/lib/jquery.nicescroll.min.js"></script>
 <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="/lib/jquery.iframe-transport.js"></script>
+<script src="/lib/jquery.fileupload.js"></script>
+
 <script src="/lib/d3.min.js"></script>
-<script src="/lib/dropzone/dropzone.js"></script>
 <script src="/lib/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="/lib/aa/frames.js"></script>
 <script src="/lib/aa/ace-modelist.js"></script>

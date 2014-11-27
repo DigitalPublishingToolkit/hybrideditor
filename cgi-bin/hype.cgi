@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+#
+# (c) 2014 Michael Murtaugh and contributors to the Digital Publishing Toolkit
+
+# License: GPL3
+
+# This code has been developed as part of the [Digital Publishing Toolkit](http://digitalpublishingtoolkit.org).
+# with the support of Institute for [Network Cultures](http://networkcultures.org)
+# and [Creating 010](http://creating010.com).
 
 import cgitb; cgitb.enable()
 import os, sys, cgi, mimetypes
@@ -33,11 +41,13 @@ print """<!DOCTYPE html>
         <div id="listing" class="left">
             <div class="controls">
                 <span class="selection_functions">
+                    <button id="listing_download">download</button>
                     <button id="listing_rename">rename</button>
                     <button id="listing_delete">delete</button>
                     <button id="listing_cancel">cancel</button>
                 </span>
                 <span class="regular_functions">
+                    <button id="listing_select_all">select all</button>
                     <button id="listing_newfile">new file</button>
                     <button id="listing_newfolder">new folder</button>
                     <button id="listing_refresh" class="refresh">refresh</button>

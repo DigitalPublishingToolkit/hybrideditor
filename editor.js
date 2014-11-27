@@ -1,3 +1,16 @@
+/*
+
+(c) 2014 Michael Murtaugh and contributors to the Digital Publishing Toolkit
+
+License: GPL3
+
+This code has been developed as part of the [Digital Publishing Toolkit](http://digitalpublishingtoolkit.org).
+with the support of Institute for [Network Cultures](http://networkcultures.org)
+and [Creating 010](http://creating010.com).
+
+*/
+
+
 var editor_factory = aa_aceeditor(window.ace),
     editor = editor_factory.get_editor(),
     editor_elt = d3.select(editor.elt),
@@ -20,6 +33,7 @@ var editor_factory = aa_aceeditor(window.ace),
     make_gear = make_icon
         .append("div")
         .attr("class", "gear");
+
 
 function url_for (script) {
     return cgi_url+script+"?p=" + encodeURIComponent(project);
@@ -92,17 +106,30 @@ aa_frames(document.getElementById("split"));
 
 document.getElementById("editor").appendChild(editor.elt);
 
-function edit (url) {
-    editor.href(url);
+var activeURL;
+
+function updateActiveItem () {
+    var item = d3.selectAll("#listing div.item")
+        .classed("active", function (d) {
+            return d.url == activeURL;
+        });
+}
+
+function edit (url, done, forceReload) {
+    activeURL = url;
+    editor.href(url, done, forceReload);
+    editor.aceeditor.focus();
     editor_elt
         .style("display", "block");
     preview_div
         .style("display", "none");
     close_make();
+    updateActiveItem();
     // make_div.style("display", "none");
 }
 
 function preview (url) {
+    activeURL = url;
     preview_div
         .style("display", "block");
     editor_elt
@@ -110,6 +137,7 @@ function preview (url) {
     preview_iframe
         .attr("src", url);
     close_make();
+    updateActiveItem();
     // make_div.style("display", "none");
 }
 
@@ -143,18 +171,11 @@ function make (path, done) {
 function make_busy (val) {
     make_div.classed("busy", val);
 }
-/*
+
 function select_all () {
-    var checkboxes = d3.selectAll(".itemcheckbox"),
-        checked = d3.selectAll(".itemcheckbox:checked");
-    if (checkboxes.size() == checked.size()) {
-        checkboxes.property("checked", false);
-    } else {
-        checkboxes.property("checked", true);
-    }
+    d3.selectAll("#listing div.item").each(item_select);
     update_selection();
 }
-*/
 
 function delete_selection () {
     var items_selected = d3.selectAll("#listing div.selected"),
@@ -178,6 +199,25 @@ function delete_selection () {
                 refresh_listing();
              }
         });
+    }
+}
+
+function download_selection () {
+    var items_selected = d3.selectAll("#listing div.selected"),
+        num_selected = items_selected.size(),
+        paths = items_selected.data().map(function (d) { return d.path });
+
+    if (num_selected == 0) return;
+    var ok = true; //confirm("Download "+num_selected+" selected file"+((num_selected==1)?"":"s") + "?");
+    if (ok) {
+        var url = url_for("download.cgi");
+        url += paths.map(function(x) { return "&f[]="+encodeURIComponent(x); }).join("");
+        // console.log("download", url);
+        preview_iframe
+            .attr("src", url);
+
+        items_selected.each(item_deselect);
+        update_selection();
     }
 }
 
@@ -256,7 +296,7 @@ function rename () {
         $("#listing .listing_rename_buttons").hide();
         return;
     }
-    var ok = confirm("Rename "+ss.size()+" file"+((ss==1)?"":"s") + "?");
+    var ok = true; // confirm("Rename "+ss.size()+" file"+((ss==1)?"":"s") + "?");
     if (ok) {
         ss.each(function (d) {
             var newpath = d3.select(this.parentNode).select("input.rename").property("value");
@@ -320,12 +360,16 @@ function refresh_listing(done) {
                 }
                 if (d.remake) {
                     // alert("make");
+                    activeURL = d.url;
+                    updateActiveItem();
                     make(d.path, function () {
                         // re-get the d in case of change!
                         var d = d3.select(that).datum();
                         // console.log("d", d, d.binary, d.url); 
                         if (!d.binary) {
-                            edit(d.url);
+                            // force reload!
+                            console.log("force reload")
+                            edit(d.url, null, true);
                         } else {
                             preview(d.url);
                         }
@@ -364,8 +408,10 @@ refresh_listing();
 $("#listing .body").niceScroll({cursorcolor:"#0F0"});
 $("#editor .make .body").niceScroll({cursorcolor:"#0F0"});
 
+$("#listing_select_all").click(select_all);
 $("#listing_refresh").click(refresh_listing);
 $("#listing_delete").click(delete_selection);
+$("#listing_download").click(download_selection);
 $("#listing_rename").click(rename);
 $("#listing_cancel").click(listing_cancel);
 // $("#listing_select_all").click(select_all);

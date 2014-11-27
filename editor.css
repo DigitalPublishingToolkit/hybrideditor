@@ -101,6 +101,23 @@ a:hover {
     width: auto;
 }
 
+#listing div.item a {
+    text-decoration: none;
+}
+
+#listing div.item.active a {
+    font-weight: bold;
+}
+
+#listing div.item.active a::after {
+    content: " \2192";
+    font-weight: bold;
+}
+
+#listing div.item a:hover {
+    text-decoration: underline;
+}
+
 #listing div.item a.normal {
     color: black;
 }
@@ -124,6 +141,10 @@ a:hover {
 
 #listing .selection_functions {
     display: none;
+}
+
+#listing button, #listing select {
+    margin-right: 2px;
 }
 
 /* *** */
@@ -156,6 +177,10 @@ a:hover {
 
 .editorfoot label {
     font-size: 12px;
+}
+
+.editorfoot button, .editorfoot select {
+    margin-right: 6px;
 }
 
 #editor .preview {

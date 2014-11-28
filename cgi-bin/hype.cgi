@@ -48,8 +48,7 @@ print """<!DOCTYPE html>
                 </span>
                 <span class="regular_functions">
                     <button id="listing_select_all">select all</button>
-                    <button id="listing_newfile">new file</button>
-                    <button id="listing_newfolder">new folder</button>
+                    <button id="listing_new_file">new file</button>
                     <button id="listing_refresh" class="refresh">refresh</button>
                 </span>
             </div>

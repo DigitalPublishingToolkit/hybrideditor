@@ -1,5 +1,5 @@
 import os, operator, sys, re, subprocess, mimetypes, json
-from settings import PROJECT_PATH, PROJECT_URL, MAKE
+from settings import PROJECT_PATH, PROJECT_URL, MAKE, MAKEFILE
 from urlparse import urljoin
 from pprint import pprint
 from itertools import tee, izip
@@ -87,7 +87,14 @@ class Project (object):
         Must remake target `...'   ==> remake
         """
         try:
-            output = subprocess.check_output([MAKE, "-n", "--debug=v"], cwd=self.fullpath)
+            args = [MAKE]
+            if MAKEFILE:
+                args.append("-f")
+                args.append(MAKEFILE)
+            args.append("-n")
+            args.append("--debug=v")
+
+            output = subprocess.check_output(args, cwd=self.fullpath)
             missingpat = re.compile(r"^\s*File\ \`(.+?)\'\ does\ not\ exist\.\s*$", re.M)
             remakepat = re.compile(r"^\s*Must\ remake\ target\ \`(.+?)\'\.\s*$", re.M)
             missing = [x for x in missingpat.findall(output) if is_filename(x)]

@@ -10,7 +10,6 @@ and [Creating 010](http://creating010.com).
 
 */
 
-
 var editor_factory = aa_aceeditor(window.ace),
     editor = editor_factory.get_editor(),
     editor_elt = d3.select(editor.elt),
@@ -327,6 +326,12 @@ function rename () {
 
 }
 
+function new_file () {
+    d3.json(url_for("touch.cgi"), function (data) {
+        refresh_listing();
+    })
+}
+
 function refresh_listing(done) {
     d3.json(url_for("listing.cgi"), function (data) {
         // console.log("data", data);
@@ -414,6 +419,7 @@ $("#listing_delete").click(delete_selection);
 $("#listing_download").click(download_selection);
 $("#listing_rename").click(rename);
 $("#listing_cancel").click(listing_cancel);
+$("#listing_new_file").click(new_file);
 // $("#listing_select_all").click(select_all);
 
 /* File drop */

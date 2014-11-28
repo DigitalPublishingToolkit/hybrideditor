@@ -387,3 +387,8 @@ div.ace_print-margin{
 
 /* Provides visible feedback when use drags a file over the drop zone: */
 .fd-zone.over { border-color: maroon; background: #eee; }
+
+
+.editorbody {
+    font-size: 18px !important;
+}

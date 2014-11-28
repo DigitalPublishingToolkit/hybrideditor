@@ -3,7 +3,7 @@
 import cgitb; cgitb.enable()
 import os, sys, cgi, json
 from subprocess import PIPE, Popen
-from settings import PROJECT_PATH, PROJECT_URL, EDITOR_URL, MAKE
+from settings import PROJECT_PATH, PROJECT_URL, EDITOR_URL, MAKE, MAKEFILE
 from project import Project
 
 method = os.environ.get("REQUEST_METHOD", "")
@@ -14,10 +14,14 @@ dryrun = fs.getvalue("n", "")
 
 if path:
     proj = Project(project)
+    args = [MAKE]
+    if MAKEFILE:
+        args.append("-f")
+        args.append(MAKEFILE)
     if dryrun:
-        p = Popen([MAKE, "-n", path], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=proj.fullpath)
-    else:
-        p = Popen([MAKE, path], stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=proj.fullpath)
+        args.append("-n")
+    args.append(path)
+    p = Popen(args, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=proj.fullpath)
     stdout, stderr = p.communicate()
     ret = {}
     ret['stdout'] = stdout

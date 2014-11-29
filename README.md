@@ -15,6 +15,11 @@ To run:
 
     python serve.py
 
+visit:
+http://localhost:8000/cgi-bin/start.cgi
+or
+http://localhost:8000/cgi-bin/select.cgi
+
 ## License
 
 This software is released under a [GPLv3 license](http://www.gnu.org/copyleft/gpl.html). See LICENSE.
